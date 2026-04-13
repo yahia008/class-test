@@ -13,6 +13,7 @@ contract FixBankTest is Test {
     address public user2 = makeAddr("user2");
     address public attacker = makeAddr("attacker");
     uint256 constant ATTACK_AMOUNT = 1 ether;
+    uint256 constant INITIAL_DEPOSIT = 10 ether;
 
     function setUp() public {
         fixBank = new FixBank();
@@ -20,6 +21,19 @@ contract FixBankTest is Test {
         vm.deal(user1, 100 ether);
         vm.deal(user2, 100 ether);
         vm.deal(attacker, 100 ether);
+    }
+
+     function test_withdraw() public {
+        vm.prank(user1);
+        fixBank.deposit{value: INITIAL_DEPOSIT}();
+
+        uint256 user1initialbal = user1.balance;
+        uint256 bankInitbal = address(fixBank).balance;
+
+        vm.prank(user1);
+        fixBank.withdraw(INITIAL_DEPOSIT);
+
+        assertEq(user1.balance, user1initialbal + INITIAL_DEPOSIT);
     }
 
    function test_Revert_fixBank() public {
@@ -44,5 +58,7 @@ contract FixBankTest is Test {
 
         assertEq(contractBalanceAfter, contractBalanceBefore, "Balance should not change");
     }
+
+    
 
 }
