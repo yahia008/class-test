@@ -13,9 +13,9 @@ contract Bank {
 
         (bool success,) = msg.sender.call{value: amount}("");
         require(success, "Transfer failed");
-        
-      unchecked {
+
+        unchecked {
             balances[msg.sender] -= amount;
-      } 
+        }
     }
 }

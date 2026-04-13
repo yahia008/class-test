@@ -12,7 +12,6 @@ contract Attack {
 
     function _reenter() internal {
         if (address(bank).balance >= AMOUNT) {
-            
             bank.withdraw(AMOUNT);
         }
     }

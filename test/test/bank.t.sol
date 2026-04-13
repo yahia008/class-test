@@ -52,7 +52,7 @@ contract BankTest is Test {
 
         console.log("hello");
         console.log("before", contractbal / 1e18);
-        
+
 
         vm.startPrank(attacker);
         Attack attackerContract = new Attack(address(bank));
@@ -64,14 +64,14 @@ contract BankTest is Test {
         uint256 contractbalAfter = address(bank).balance;
         uint256 attackerContractbal = address(attackerContract).balance;
 
-    
+
 
         console.log("hello");
         console.log("after attack", contractbalAfter / 1e18);
 
         assertEq(address(bank).balance, contractbal);
-        
-        
+
+
     }
     */
 
@@ -98,9 +98,5 @@ contract BankTest is Test {
         console.log("acttack contract bal:", attackContractBalance / 1e18);
 
         assertEq(contractBalanceAfter, 0, "EtherStore should be drained");
-
-     }
-     
-
-
+    }
 }
